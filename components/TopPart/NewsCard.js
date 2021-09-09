@@ -6,72 +6,74 @@ import { BlurView } from 'expo-blur';
 
 
 
-export class NewsCard extends Component {
-    render() {
-        return (
-            <View style={styles.card}>
-                <ImageBackground source={require('./picture.jpeg')}
-                    style={{
-                        height: 535,
+export const NewsCard = ({ article }) => {
+
+    const { imageUrl, title, summary, publishedAt, newsSite } = article.item;
+
+    return (
+        <View style={styles.card}>
+            <ImageBackground source={{ uri: imageUrl }}
+                style={{
+                    height: 535,
+                    width: 280,
+                    justifyContent: 'flex-end',
+                    flex: 1
+                }}>
+                <BlurView intensity={100} tint="dark" style={{
+                    width: 280,
+                    maxHeight: 250,
+                    flex: 1,
+                }}>
+                    <Text style={styles.title}> {title} </Text>
+                    <Text style={styles.resume}>{summary}</Text>
+                    <View style={{
+                        maxHeight: 250,
                         width: 280,
                         justifyContent: 'flex-end',
                         flex: 1
                     }}>
-                    <BlurView intensity={100} tint="dark" style={{
-                        width: 280,
-                        maxHeight: 250,
-                        flex: 1,
-                    }}>
-                        <Text style={styles.title}>Le Titre</Text>
-                        <Text style={styles.resume}>Petit resumé</Text>
                         <View style={{
-                            maxHeight: 250,
+                            maxHeight: 80,
                             width: 280,
-                            justifyContent: 'flex-end',
-                            flex: 1
+                            backgroundColor: 'transparent',
+                            flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'space-between'
                         }}>
-                            <View style={{
-                                maxHeight: 80,
-                                width: 280,
-                                backgroundColor: 'transparent',
-                                flex: 1,
-                                flexDirection: 'row',
-                                justifyContent: 'space-between'
-                            }}>
-                                <View>
-                                    <Text style={{
-                                        fontSize: 18,
-                                        fontWeight: 'bold',
-                                        color: 'white',
-                                        paddingLeft: 10,
-                                        paddingTop: 15
-                                    }} >
-                                        Nasa</Text>
-                                    <Text style={{
-                                        fontSize: 14,
-                                        color: 'white',
-                                        paddingLeft: 10,
-                                        paddingTop: 5
-                                    }}>2021-08-29</Text>
-                                </View>
+                            <View>
+                                <Text style={{
+                                    fontSize: 18,
+                                    fontWeight: 'bold',
+                                    color: 'white',
+                                    paddingLeft: 10,
+                                    paddingTop: 15
+                                }} >
+                                    {newsSite}</Text>
+                                <Text style={{
+                                    fontSize: 14,
+                                    color: 'white',
+                                    paddingLeft: 10,
+                                    paddingTop: 5
+                                }}>{publishedAt}</Text>
+                            </View>
 
-                                <View style={{
-                                    flex: 1,
-                                    justifyContent: 'center',
-                                    maxHeight: 80,
-                                    maxWidth: 60
-                                }}>
-                                    <CreateurImage />
-                                </View>
+                            <View style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                maxHeight: 80,
+                                maxWidth: 60
+                            }}>
+                                <CreateurImage />
                             </View>
                         </View>
-                    </BlurView>
-                </ImageBackground>
+                    </View>
+                </BlurView>
+            </ImageBackground>
 
-            </View>
-        )
-    }
+        </View>
+    )
 }
+
 
 export default NewsCard
 
